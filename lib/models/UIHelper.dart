@@ -531,41 +531,48 @@ class ListOfProjects extends StatelessWidget {
                 itemCount: chatRoomModel.projects?.length,
                 itemBuilder: (BuildContext context, int index) {
                   final projectId = chatRoomModel.projects![index];
-                  return FutureBuilder<ProjectModel?>(
-                    future: getProjectData(projectId),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
-                      } else if (snapshot.hasData) {
-                        final project = snapshot.data!;
-                        return InkWell(
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) =>
-                                  ProjectDetailsDialog(
-                                      project: project.toMap()),
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  project.aim!,
-                                  style: const TextStyle(fontSize: 16.0),
-                                ),
-                                const Icon(Icons.arrow_forward_ios_rounded),
-                              ],
+                  if (projectId != null) {
+                    return FutureBuilder<ProjectModel?>(
+                      future: getProjectData(projectId),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const CircularProgressIndicator();
+                        } else if (snapshot.hasData) {
+                          final project = snapshot.data!;
+                          return InkWell(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    ProjectDetailsDialog(
+                                        project: project.toMap()),
+                              );
+                            },
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    project.aim!,
+                                    style: const TextStyle(fontSize: 16.0),
+                                  ),
+                                  const Icon(Icons.arrow_forward_ios_rounded),
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      } else {
-                        return const SizedBox.shrink();
-                      }
-                    },
-                  );
+                          );
+                        } else {
+                          return const SizedBox.shrink();
+                        }
+                      },
+                    );
+                  } else {
+                    return const Text('No projects available');
+                  }
                 },
               ),
               const SizedBox(height: 16.0),

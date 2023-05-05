@@ -11,31 +11,37 @@ class OnBoardingPage extends StatelessWidget {
         child: IntroductionScreen(
           pages: [
             PageViewModel(
-              title: 'A reader lives a thousand lives',
-              body: 'The man who never reads lives only one.',
+              title: 'Investor-Freelancer Platform',
+              body: 'Connect with Investors and Freelancers with Ease',
               image: buildImage('assets/ebook.png'),
               decoration: getPageDecoration(),
             ),
             PageViewModel(
-              title: 'Featured Books',
-              body: 'Available right at your fingerprints',
-              image: buildImage('assets/readingbook.png'),
-              decoration: getPageDecoration(),
-            ),
-            PageViewModel(
-              title: 'Simple UI',
-              body: 'For enhanced reading experience',
+              title: 'Swipe Cards',
+              body:
+                  'Find the perfect match for your project with our Tinder-like swipe cards.',
               image: buildImage('assets/manthumbs.png'),
               decoration: getPageDecoration(),
             ),
             PageViewModel(
-              title: 'Today a reader, tomorrow a leader',
-              body: 'Start your journey',
-              footer: ButtonWidget(
-                text: 'Start Reading',
-                onClicked: () => goToHome(context),
-              ),
+              title: 'Video Calls',
+              body:
+                  'Communicate with potential investors and freelancers through video calls.',
               image: buildImage('assets/learn.png'),
+              decoration: getPageDecoration(),
+            ),
+            PageViewModel(
+              title: 'Chat Functionality',
+              body:
+                  'Keep in touch with your connections using our chat feature.',
+              footer: ButtonWidget(
+                text: 'Get Started',
+                onClicked: () => goToHome(context),
+                // padding: EdgeInsets.symmetric(
+                //     horizontal: 12.0,
+                //     vertical: 8.0), // adjust padding as desired
+              ),
+              image: buildImage('assets/readingbook.png'),
               decoration: getPageDecoration(),
             ),
           ],
@@ -43,9 +49,22 @@ class OnBoardingPage extends StatelessWidget {
               const Text('Read', style: TextStyle(fontWeight: FontWeight.w600)),
           onDone: () => goToHome(context),
           showSkipButton: true,
-          skip: const Text('Skip'),
+          skip: const Text(
+            'Skip',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.2,
+            ),
+            textAlign: TextAlign.left,
+          ),
+
           onSkip: () => goToHome(context),
-          next: const Icon(Icons.arrow_forward),
+          next: const Icon(
+            Icons.arrow_forward,
+            color: Colors.white,
+          ),
           dotsDecorator: getDotDecoration(),
           onChange: (index) => log('Page $index selected'),
           globalBackgroundColor: Theme.of(context).primaryColor,
@@ -67,7 +86,7 @@ class OnBoardingPage extends StatelessWidget {
       Center(child: Image.asset(path, width: 350));
 
   DotsDecorator getDotDecoration() => DotsDecorator(
-        color: const Color(0xFFBDBDBD),
+        color: Color.fromARGB(255, 248, 248, 248),
         //activeColor: Colors.orange,
         size: const Size(10, 10),
         activeSize: const Size(22, 10),
